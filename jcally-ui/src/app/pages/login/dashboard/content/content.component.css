@@ -1,0 +1,48 @@
+.tab-container{
+    margin: 50px;
+    width: 70%;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+  
+  .example-container form {
+    margin-bottom: 20px;
+  }
+  
+  .example-container form > * {
+    margin: 5px 0;
+  }
+  
+  .example-container .mat-radio-button {
+    margin: 0 5px;
+  }
+
+  .done {
+    z-index:5; position : fixed;display : flex;  right: 20px;
+    align-self : flex-end;bottom : 10%; margin-bottom : 68px;
+    
+  }
+
+  .messageclass{
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .titleClass{
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+ .content-container{
+   display: flex;
+   flex-direction: row;
+ }
+ .extensions-nav{
+  margin: 50px 0; 
+   width: 30%;
+ }

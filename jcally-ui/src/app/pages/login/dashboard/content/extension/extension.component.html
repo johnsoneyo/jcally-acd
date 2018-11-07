@@ -1,0 +1,31 @@
+<div class="extension-container">
+  <mat-toolbar color="primary">
+    <span>
+     Endpoints
+    </span>
+  </mat-toolbar>
+  <mat-nav-list *ngIf="endpoints else loading">
+    <mat-list-item *ngFor="let end of endpoints">
+      <a matLine href="...">{{ end.resource }}</a>
+      <img [treeDrag]="end.currentChannel" [treeDragEnabled]="true" matListAvatar width="40" height="10" src="assets/img/avatar.jpg"
+        alt="...">
+      <p matLine>
+        <span> {{end.state}} </span>
+        <span class="demo-2"> -- {{end.technology}} </span>
+      </p>
+      <p *ngIf="end.currentChannel.id !=undefined">
+        <mat-icon matTooltip="agent channel is active ">chat</mat-icon>
+      </p>
+      <button [disabled]="end.state != 'online'" (click)="dial(end)" mat-icon-button>
+        <mat-icon>{{end.state == 'online' ? 'local_phone' : 'phone_paused'}}</mat-icon>
+      </button>
+
+    </mat-list-item>
+
+  </mat-nav-list>
+  
+</div>
+
+<ng-template   #loading>
+    <mat-spinner></mat-spinner>
+</ng-template>

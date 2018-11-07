@@ -1,0 +1,20 @@
+.example-container {
+    margin: 20px 0 ;
+}
+
+.mat-row {
+    min-height: 28px;
+}
+
+.example-header {
+    min-height: 24px;
+    padding: 8px 24px 0;
+    background-color: greenyellow;
+    
+  }
+
+  .example-header  {
+    font-size: 14px;
+    
+   
+  }

@@ -1,0 +1,48 @@
+<div class="example-container mat-elevation-z8">
+    <mat-toolbar matTooltip="channel arrive here and awaiting been mixed with an agents channel" [matTooltipPosition]="position">Holding </mat-toolbar>
+    <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>Bridge ID</mat-header-cell>
+            <mat-cell droppable (onDrop)="onItemDrop($event.dragData,element.id)" *matCellDef="let element"> {{element.id}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="participants">
+            <mat-header-cell *matHeaderCellDef> Participants </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <tree-root [nodes]="element.nodes" [options]="options">
+                    <ng-template #treeNodeTemplate let-node let-index="index">
+                        <img matListAvatar width="20" height="20" src="assets/img/avatar.jpg" alt="...">
+                        <span>{{node.data.name}}</span>
+                    </ng-template>
+                </tree-root>
+                <!-- {{element.channels.length}} -->
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button class="mat-elevation-z1" [disabled]="element.nodes[0]['children'] < 1" (click)="playMedia(element.id)" mat-mini-fab>
+                    <mat-icon>play_arrow</mat-icon>
+                </button>
+                <button [superAdmin]="isAdmin" matTooltip="deletes bridge " class="mat-elevation-z1" (click)="deleteBridge(element.id)" mat-mini-fab>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+              
+                <button matTooltip="view details " (click)="openBridgeNav(element.id)"  class="mat-elevation-z1"  mat-mini-fab>
+                    <mat-icon>info</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

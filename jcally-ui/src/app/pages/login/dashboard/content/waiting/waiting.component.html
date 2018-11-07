@@ -1,0 +1,50 @@
+<div class="example-container mat-elevation-z8">
+  <mat-toolbar matTooltip="inbound calls and outbound calls arrive here and are waiting to managed" [matTooltipPosition]="position">Incoming Channels </mat-toolbar>
+  <mat-table #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <img width="30" height="30" [src]="element.state == 'Up' ?  'assets/img/green.png' : 'assets/img/red.png'"> </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef> Channel ID</mat-header-cell>
+      <mat-cell draggable [dragData]="element.id" *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Callers Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.caller.name ? element.caller.name:'unidentified'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="number">
+        <mat-header-cell *matHeaderCellDef> Number </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.caller.number}} </mat-cell>
+      </ng-container>
+
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef> State </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.state}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef> Time Created </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.creationtime | date:'medium' }} </mat-cell>
+    </ng-container>
+
+ 
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell  *matCellDef="let element">
+        <button (click)="answerChannel(element.id)" *ngIf="element.state  == 'Ring'" 
+        matTooltip="answer channel" [matTooltipPosition]="position" mat-icon-button color="primary">
+          <mat-icon>phone_callback</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

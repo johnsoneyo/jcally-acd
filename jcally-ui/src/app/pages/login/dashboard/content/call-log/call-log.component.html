@@ -1,0 +1,59 @@
+<!-- <ng-template #loading>
+  <img width="100%" height="100%" src="assets/img/giphy2.gif" />
+</ng-template> -->
+
+<div style="margin-top: 20px;" class="example-container mat-elevation-z8">
+  <mat-toolbar>Call Detail Records </mat-toolbar>
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="source">
+      <mat-header-cell *matHeaderCellDef>Source </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.source}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="destination">
+      <mat-header-cell *matHeaderCellDef> Destination </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.destination}} </mat-cell>
+    </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.day}} </mat-cell>
+      </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="startTime">
+      <mat-header-cell *matHeaderCellDef> Start Time </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.startTime | date :'hh-mm-ss'}} </mat-cell>
+    </ng-container>
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="endTime">
+      <mat-header-cell *matHeaderCellDef> End Time </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.endTime | date :'hh-mm-ss'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="noOfParticipants">
+      <mat-header-cell *matHeaderCellDef> No of Participants </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.noOfParticipants}} </mat-cell>
+    </ng-container>
+
+     <!-- Name Column -->
+     <ng-container matColumnDef="duration">
+      <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.duration}} </mat-cell>
+  </ng-container>
+    <!-- Weight Column -->
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<mat-paginator [length]="100"
+              [pageSize]="10" 
+              (page)="pageEventChange($event)" [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>

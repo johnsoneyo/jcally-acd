@@ -1,0 +1,26 @@
+<form novalidate [formGroup]="bridge">
+<div class="closebutton">
+<button mat-icon-button (click)="closeDialog()"  color="primary">
+    <mat-icon aria-label="Example icon-button with a heart icon">close</mat-icon>
+  </button>
+</div>
+
+<div class="example-container">
+  <mat-form-field>
+    <input matInput formControlName ="name" #input maxlength="10" placeholder="Name">
+    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select formControlName ="type" placeholder="Technology">
+      <mat-option value="holding">Holding</mat-option>
+      <mat-option value="mixing">Mixing</mat-option>
+      </mat-select>
+      <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+  </mat-form-field>
+  
+</div>
+<div>
+    <button mat-raised-button (click)="saveBridge(bridge)" color="primary">Save</button>
+</div>
+</form>

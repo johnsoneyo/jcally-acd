@@ -1,0 +1,13 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+
+  .closebutton{
+      display: flex;
+      justify-content: flex-end;
+  }

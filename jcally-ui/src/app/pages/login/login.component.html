@@ -1,0 +1,22 @@
+<div class="login-container">
+<mat-card>
+<mat-card-title>
+  J-Cally 
+</mat-card-title>
+  <mat-card-content>
+    <form class="example-form" [formGroup]="credentials" >
+      <mat-form-field class="example-full-width">
+        <input matInput formControlName ="username"  placeholder="Username">
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <input matInput formControlName ="password"  type="password" placeholder="Password" >
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button class="button-width" [disabled]="!credentials.valid" (click)="login(credentials)" mat-raised-button color="primary">sign in</button>
+    <button class="button-width" mat-button color="primary">forgot password</button>
+    </mat-card-actions>
+</mat-card>
+</div>

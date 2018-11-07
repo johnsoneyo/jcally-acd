@@ -1,0 +1,20 @@
+.mat-list .mat-list-item .mat-list-item-content, .mat-list .mat-list-option .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-option .mat-list-item-content, .mat-selection-list .mat-list-item .mat-list-item-content, .mat-selection-list .mat-list-option .mat-list-item-content{
+    flex-direction: row-reverse;
+}
+
+.extension-container{
+    margin-right: 50px;
+}
+
+.ass {
+    width: 24px;
+    height: 24px;
+    transform: scale(2);
+}
+
+.center {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+}

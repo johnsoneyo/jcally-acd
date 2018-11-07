@@ -1,0 +1,34 @@
+<mat-toolbar [class.mat-elevation-z20]="true" color="accent">
+  <mat-icon>info</mat-icon><span>{{bridge.name}}</span>
+</mat-toolbar>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+         Type : 
+      </mat-panel-title>
+      <mat-panel-description>
+          {{bridge.bridge_type}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <mat-list-item *ngFor="let channel of bridge.channels">
+        <img matListAvatar src="assets/img/avatar.jpg">
+        <h3 matLine> {{channel}} </h3>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+       Identifier 
+      </mat-panel-title>
+      <mat-panel-description>
+       {{bridge.id}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>I'm visible because I am open</p>
+  </mat-expansion-panel>
+</mat-accordion>
+

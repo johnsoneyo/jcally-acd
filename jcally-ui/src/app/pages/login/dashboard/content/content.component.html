@@ -1,0 +1,39 @@
+<mat-drawer-container style="width: 100%; height: 100%" autosize>
+  <mat-drawer [opened]="isViewed" (closedStart)="closing()" class="example-sidenav" mode="push">
+    <app-bridge-details></app-bridge-details>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+
+    <div class="content-container">
+      <mat-tab-group [backgroundColor]="primary" class="tab-container">
+        <mat-tab label="Bridge Management">
+          <mat-divider></mat-divider>
+          <app-waiting></app-waiting>
+          <app-holding-bridge (viewBridgeEmitter)="showNavView($event)"></app-holding-bridge>
+          <app-mixing-bridge></app-mixing-bridge>
+        </mat-tab>
+        <mat-tab label="Call Detail Record">
+          <app-call-log></app-call-log>
+        </mat-tab>
+        <mat-tab label="Metrics">      
+          <app-metrics></app-metrics>     
+        </mat-tab>
+        <mat-tab label="Profile">
+          <app-profile></app-profile>
+        </mat-tab>
+      </mat-tab-group>
+
+      <div class="extensions-nav">
+        <app-extension></app-extension>
+      </div>
+
+      <span class="done">
+        <button (click)="openSaveBridgeDialog()" mat-fab>
+          <mat-icon>add</mat-icon>
+        </button>
+      </span>
+    </div>
+  </div>
+
+</mat-drawer-container>
