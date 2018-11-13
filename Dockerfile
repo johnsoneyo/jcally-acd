@@ -54,11 +54,9 @@ RUN git clone https://github.com/johnsoneyo/jcally-packaging.git
 
 WORKDIR jcally-packaging
 RUN sed -i 's/localhost/$ariproxyhost/g' jcally-ui/src/environments/*.ts
-RUN sed -l 's/ username : 'asterisk'/ username : '$ariusername'/g' jcally-ui/src/environments/*.ts
-RUN sed -l 's/ password : 'asterisk'/ passowrd : '$aripassword'/g' jcally-ui/src/environments/*.ts
-
+RUN sed -i 's/ username : 'asterisk'/ username : '$ariusername'/g' jcally-ui/src/environments/*.ts
+RUN sed -i 's/ password : 'asterisk'/ passowrd : '$aripassword'/g' jcally-ui/src/environments/*.ts
 RUN mvn clean package -DskipTests=true
-ADD target/ariproxy.jar ariproxy.jar
-
+WORKDIR jcally-backend/target
 EXPOSE 8080
-#ENTRYPOINT ["java","-jar","ariproxy.jar"]
+#ENTRYPOINT ["java","-jar","jcally-backend.jar"]

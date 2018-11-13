@@ -11,7 +11,7 @@ import { BridgeResponse } from '../../../../../datatransferobjects/bridge.respon
 export class BridgeDetailsComponent implements OnInit {
 
   constructor(private notfie: NotifierService, private ariproxy: AriproxyService) { }
-
+  public panelOpenState : boolean = true;
  
   public bridge : BridgeResponse = new BridgeResponse();
   ngOnInit() {
