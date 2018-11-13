@@ -30,6 +30,9 @@
                     <arguments>
                         <argument>build</argument>
                     </arguments>
+                     <arguments>
+                        <argument>--prod</argument>
+                    </arguments>
                 </configuration>
             </plugin>
             <plugin>

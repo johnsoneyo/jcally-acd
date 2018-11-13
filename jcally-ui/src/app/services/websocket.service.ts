@@ -4,9 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { WsnotifierService } from './wsnotifier.service';
 import { OnMessage } from '../pages/login/dashboard/content/onmessage';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class WebsocketService {
+
+  host : string = environment.host;
+  username : string = environment.username;
+  password : string = environment.password;
+  app : string = environment.app;
 
   constructor(private wsnotifier: WsnotifierService) {
    }
@@ -33,7 +39,7 @@ export class WebsocketService {
   }
 
   externalCreateObservableSocket():void {
-    this.createObservableSocket('ws://localhost:8088/ari/events?api_key=asterisk:asterisk&app=hello-world');
+    this.createObservableSocket(this.host+'/ari/events?api_key='+this.username+':'+this.password+'&app='+this.app);
    }
 
 }
