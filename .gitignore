@@ -8,6 +8,8 @@
 
 # dependencies
 /jcally-ui/node_modules
+# built files
+/jcally-backend/src/main/resources/static
 
 # IDEs and editors
 .idea
