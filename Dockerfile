@@ -59,4 +59,4 @@ RUN sed -i 's/ password : 'asterisk'/ password : '$aripassword'/g' jcally-ui/src
 RUN mvn clean package -DskipTests=true
 WORKDIR jcally-backend/target
 EXPOSE 8080
-#ENTRYPOINT ["java","-jar","jcally-backend.jar"]
+ENTRYPOINT ["java","-jar","jcally-backend.jar"]
