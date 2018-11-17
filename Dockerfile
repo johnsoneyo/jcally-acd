@@ -1,13 +1,13 @@
 FROM anapsix/alpine-java:8_jdk
 
-ENV mysqlhost localhost:3306
-ENV arihost localhost:8088
-ENV ariproxyhost localhost:8088
-ENV jdbcuser root
-ENV jdbcpasswd freaks03
-ENV mysqlschema ariproxy
-ENV ariusername asterisk
-ENV aripassword asterisk
+ARG mysqlhost=localhost:3306
+ARG arihost=localhost:8088
+ARG ariproxyhost=localhost:8088
+ARG jdbcuser=root
+ARG jdbcpasswd=freaks03
+ARG mysqlschema=ariproxy
+ARG ariusername=asterisk
+ARG aripassword=asterisk
 
 
 RUN apk add --update nodejs nodejs-npm
@@ -47,7 +47,7 @@ echo "spring.datasource.hikari.connection-timeout=60000" >> application.properti
 echo "spring.datasource.hikari.maximum-pool-size=5" >> application.properties && \
 echo "media.stream.synthesize=https://texttospeech.googleapis.com/v1beta1/text:synthesize" >> application.properties && \
 echo "media.stream.synthesize.stream=sound:http://localhost:8080/google-tts/stream?text=" >> application.properties && \
-echo "sound.output.dir=/home/johnson3yo/sound───" >> application.properties 
+echo "sound.output.dir=/home/johnson3yo/sound" >> application.properties 
 
 # clone master project
 RUN git clone https://github.com/johnsoneyo/jcally-packaging.git
@@ -55,7 +55,7 @@ RUN git clone https://github.com/johnsoneyo/jcally-packaging.git
 WORKDIR jcally-packaging
 RUN sed -i 's/localhost/$ariproxyhost/g' jcally-ui/src/environments/*.ts
 RUN sed -i 's/ username : 'asterisk'/ username : '$ariusername'/g' jcally-ui/src/environments/*.ts
-RUN sed -i 's/ password : 'asterisk'/ passowrd : '$aripassword'/g' jcally-ui/src/environments/*.ts
+RUN sed -i 's/ password : 'asterisk'/ password : '$aripassword'/g' jcally-ui/src/environments/*.ts
 RUN mvn clean package -DskipTests=true
 WORKDIR jcally-backend/target
 EXPOSE 8080
