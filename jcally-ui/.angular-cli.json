@@ -23,7 +23,10 @@
         "../node_modules/ng.tree/style/tree.css",
         "../node_modules/angular-tree-component/dist/angular-tree-component.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/chart.js/dist/Chart.bundle.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
