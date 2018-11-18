@@ -57,6 +57,7 @@
                             <arguments>
                                 <argument>build</argument>
                                 <argument>--prod</argument>
+                                <argument>--aot=false</argument>
                             </arguments>
                         </configuration>
                     </execution>

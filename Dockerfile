@@ -36,8 +36,8 @@ RUN touch application.properties
 
 # write to application properties
 RUN echo "ari.host=http://"$arihost"/" >> application.properties && \
-echo "ari.username=asterisk" >> application.properties && \
-echo "ari.password=asterisk" >> application.properties && \
+echo "ari.username=${ariusername}" >> application.properties && \
+echo "ari.password=${aripassword}" >> application.properties && \
 echo "base.url=http://"$ariproxyhost"/ari" >> application.properties && \
 echo "spring.datasource.url=jdbc:mysql://"$mysqlhost"/"$mysqlschema"?autoReconnect=true&useSSL=false" >> application.properties && \
 echo "spring.datasource.username="$jdbcuser >> application.properties && \
