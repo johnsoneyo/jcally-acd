@@ -9,7 +9,8 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class WebsocketService {
 
-  host : string = environment.host;
+  host : string = environment.wshost;
+  port : string = environment.wsport;
   username : string = environment.username;
   password : string = environment.password;
   app : string = environment.app;
@@ -39,7 +40,7 @@ export class WebsocketService {
   }
 
   externalCreateObservableSocket():void {
-    this.createObservableSocket(this.host+'/ari/events?api_key='+this.username+':'+this.password+'&app='+this.app);
+    this.createObservableSocket('ws://'+this.host+':'+this.port+'/ari/events?api_key='+this.username+':'+this.password+'&app='+this.app);
    }
 
 }

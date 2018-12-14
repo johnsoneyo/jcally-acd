@@ -1,7 +1,10 @@
 export const environment = {
-  production: true,
-  host: 'ws://localhost:8088',
+  production: false,
+  wshost: 'localhost',
+  wsport : '8088',
   username : 'asterisk',
   password : 'asterisk',
-  app : 'hello-world'
+  app : 'hello-world',
+  arihost : 'localhost',
+  ariport: '8080'
 };

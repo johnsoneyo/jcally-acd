@@ -1,13 +1,16 @@
 FROM anapsix/alpine-java:8_jdk
 
 ARG mysqlhost=localhost:3306
-ARG arihost=localhost:8088
-ARG ariproxyhost=localhost:8088
+ARG ariwshost=localhost
+ARG ariwsport=8088
+ARG ariproxyhost=localhost
+ARG ariproxyport=8080
 ARG jdbcuser=root
 ARG jdbcpasswd=freaks03
 ARG mysqlschema=ariproxy
 ARG ariusername=asterisk
 ARG aripassword=asterisk
+ARG appName=hello-world
 
 
 RUN apk add --update nodejs nodejs-npm
@@ -35,10 +38,10 @@ WORKDIR /usr/ariproxy
 RUN touch application.properties
 
 # write to application properties
-RUN echo "ari.host=http://"$arihost"/" >> application.properties && \
-echo "ari.username=${ariusername}" >> application.properties && \
-echo "ari.password=${aripassword}" >> application.properties && \
-echo "base.url=http://"$ariproxyhost"/ari" >> application.properties && \
+RUN echo "ari.host=http://"${ariproxyhost}":"${ariproxyport}"/" >> application.properties && \
+echo "ari.username="$ariusername >> application.properties && \
+echo "ari.password="$aripassword >> application.properties && \
+echo "base.url=http://"${ariproxyhost}":"${ariproxyport}"/ari" >> application.properties && \
 echo "spring.datasource.url=jdbc:mysql://"$mysqlhost"/"$mysqlschema"?autoReconnect=true&useSSL=false" >> application.properties && \
 echo "spring.datasource.username="$jdbcuser >> application.properties && \
 echo "spring.datasource.password="$jdbcpasswd >> application.properties && \
@@ -53,7 +56,9 @@ echo "sound.output.dir=/home/johnson3yo/sound" >> application.properties
 RUN git clone https://github.com/johnsoneyo/jcally-packaging.git
 
 WORKDIR jcally-packaging
-RUN sed -i 's/localhost/$ariproxyhost/g' jcally-ui/src/environments/*.ts
+RUN sed -i 's/wshost/${ariwshost}/g' jcally-ui/src/environments/*.ts
+RUN sed -i 's/wsport/${ariwsport}/g' jcally-ui/src/environments/*.ts
+RUN sed -i 's/app/${appName}/g' jcally-ui/src/environments/*.ts
 RUN sed -i 's/ username : 'asterisk'/ username : '$ariusername'/g' jcally-ui/src/environments/*.ts
 RUN sed -i 's/ password : 'asterisk'/ password : '$aripassword'/g' jcally-ui/src/environments/*.ts
 RUN mvn clean package -DskipTests=true

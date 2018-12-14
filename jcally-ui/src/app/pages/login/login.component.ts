@@ -13,6 +13,7 @@ import { NotifierService } from '../../services/notifier.service';
 export class LoginComponent implements OnInit {
 
   credentials: FormGroup;
+  public waiting : Boolean = false;
 
   constructor(
     private notifier: NotifierService,
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
 
 
   login(cred) {
+    this.waiting = true;
     this.auth.login(cred.value).subscribe(user => {
       this.auth.setLoggedIn(true);
       localStorage.setItem('user',JSON.stringify(user));
@@ -40,7 +42,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/dashboard']);
     }, error => {
       this.router.navigate(['/']);
-      this.toastr.error('management user not found ')
+      this.toastr.error('management user not found ');
+      this.waiting = false;
     });
 
   }

@@ -5,8 +5,11 @@
 
 export const environment = {
   production: false,
-  host: 'ws://localhost:8088',
+  wshost: 'localhost',
+  wsport : '8088',
   username : 'asterisk',
   password : 'asterisk',
-  app : 'hello-world'
+  app : 'hello-world',
+  arihost : 'localhost',
+  ariport: '8080'
 };

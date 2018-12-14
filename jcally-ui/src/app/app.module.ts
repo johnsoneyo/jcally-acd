@@ -55,6 +55,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { BridgeDetailsComponent } from './pages/login/dashboard/content/bridge-details/bridge-details.component';
 import { ChartsModule } from 'ng2-charts';
 import { MetricsComponent } from './pages/login/dashboard/content/metrics/metrics.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 const appRoutes: Routes = [
@@ -71,7 +72,7 @@ const appRoutes: Routes = [
   imports: [MatExpansionModule,MatInputModule,MatTableModule,CdkTableModule,Ng2DragDropModule,TreeModule,RoleModule,
     MatButtonModule,HttpClientModule,MatMenuModule, FormsModule, ReactiveFormsModule,MatCheckboxModule,
     MatListModule,MatDividerModule,MatTabsModule,MatDialogModule,CommonModule,MatMenuModule,
-    MatSidenavModule,MatToolbarModule,MatIconModule,ReactiveFormsModule,MatTooltipModule,
+    MatSidenavModule,MatToolbarModule,MatIconModule,ReactiveFormsModule,MatTooltipModule,MatProgressBarModule,
     BrowserModule,BrowserAnimationsModule, MatSelectModule,ToastrModule.forRoot(),ChartsModule,
     MatCardModule,MatProgressSpinnerModule, MatDividerModule,MatPaginatorModule,MatFormFieldModule,RouterModule.forRoot(
       appRoutes,
