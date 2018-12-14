@@ -56,11 +56,11 @@ echo "sound.output.dir=/home/johnson3yo/sound" >> application.properties
 RUN git clone https://github.com/johnsoneyo/jcally-packaging.git
 
 WORKDIR jcally-packaging
-RUN sed -i "s/wshost: 'localhost'/wshost : ${ariwshost}/g" jcally-ui/src/environments/*.ts
-RUN sed -i "s/wsport : '8088'/wsport : ${ariwsport}/g" jcally-ui/src/environments/*.ts
-RUN sed -i "s/app : 'hello-world'/app : ${appName}/g" jcally-ui/src/environments/*.ts
-RUN sed -i "s/username : 'asterisk'/ username : '$ariusername'/g" jcally-ui/src/environments/*.ts
-RUN sed -i "s/password : 'asterisk'/ password : '$aripassword'/g" jcally-ui/src/environments/*.ts
+#RUN sed -i "s/wshost: 'localhost'/wshost : ${ariwshost}/g" jcally-ui/src/environments/*.ts
+#RUN sed -i "s/wsport : '8088'/wsport : ${ariwsport}/g" jcally-ui/src/environments/*.ts
+#RUN sed -i "s/app : 'hello-world'/app : ${appName}/g" jcally-ui/src/environments/*.ts
+#RUN sed -i "s/username : 'asterisk'/ username : '$ariusername'/g" jcally-ui/src/environments/*.ts
+#RUN sed -i "s/password : 'asterisk'/ password : '$aripassword'/g" jcally-ui/src/environments/*.ts
 RUN mvn clean package -DskipTests=true
 WORKDIR jcally-backend/target
 EXPOSE 8080
