@@ -42,12 +42,12 @@ RUN echo ${mysqlhost}
 
 # write to application properties
 RUN echo "ari.host=http://"${ariproxyhost}":"${ariproxyport}"/" >> application.properties && \
-echo "ari.username="$ariusername >> application.properties && \
-echo "ari.password="$aripassword >> application.properties && \
+echo "ari.username="${ariusername} >> application.properties && \
+echo "ari.password="${aripassword} >> application.properties && \
 echo "base.url=http://"${ariproxyhost}":"${ariproxyport}"/ari" >> application.properties && \
-echo "spring.datasource.url=jdbc:mysql://"$mysqlhost"/"$mysqlschema"?autoReconnect=true&useSSL=false" >> application.properties && \
-echo "spring.datasource.username="$jdbcuser >> application.properties && \
-echo "spring.datasource.password="$jdbcpasswd >> application.properties && \
+echo "spring.datasource.url=jdbc:mysql://"${mysqlhost}"/"${mysqlschema}"?autoReconnect=true&useSSL=false" >> application.properties && \
+echo "spring.datasource.username="${jdbcuser} >> application.properties && \
+echo "spring.datasource.password="${jdbcpasswd} >> application.properties && \
 echo "spring.datasource.driver-class=com.mysql.jdbc.Driver" >> application.properties && \
 echo "spring.datasource.hikari.connection-timeout=60000" >> application.properties && \
 echo "spring.datasource.hikari.maximum-pool-size=5" >> application.properties && \
