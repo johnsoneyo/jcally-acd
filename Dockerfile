@@ -65,3 +65,4 @@ RUN mvn clean package -DskipTests=true
 WORKDIR jcally-backend/target
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","jcally-backend.jar"]
+
