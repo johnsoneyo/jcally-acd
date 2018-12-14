@@ -37,7 +37,8 @@ RUN mkdir -p /usr/ariproxy
 WORKDIR /usr/ariproxy
 RUN touch application.properties
 
-RUN echo mysql host is this -->>>>>>>>>>>>>>......-> $mysqlhost 
+RUN "printing mysql host ---------------->>>>>>>>>>>>>"
+RUN echo ${mysqlhost} 
 
 # write to application properties
 RUN echo "ari.host=http://"${ariproxyhost}":"${ariproxyport}"/" >> application.properties && \
