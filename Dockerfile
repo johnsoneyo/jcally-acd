@@ -41,7 +41,7 @@ RUN echo "printing mysql host ---------------->>>>>>>>>>>>>"
 RUN echo ${mysqlhost} 
 
 # write to application properties
-RUN echo "ari.host=http://"${ariproxyhost}:${ariproxyport}/" >> application.properties && \
+RUN echo "ari.host=http://${ariproxyhost}:${ariproxyport}/" >> application.properties && \
 echo "ari.username=${ariusername}" >> application.properties && \
 echo "ari.password=${aripassword}" >> application.properties && \
 echo "base.url=http://${ariproxyhost}:${ariproxyport}/ari" >> application.properties && \
