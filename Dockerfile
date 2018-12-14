@@ -55,6 +55,9 @@ echo "media.stream.synthesize=https://texttospeech.googleapis.com/v1beta1/text:s
 echo "media.stream.synthesize.stream=sound:http://localhost:8080/google-tts/stream?text=" >> application.properties && \
 echo "sound.output.dir=/home/johnson3yo/sound" >> application.properties 
 
+
+RUN cat application.properties
+
 # clone master project
 RUN git clone https://github.com/johnsoneyo/jcally-packaging.git
 
