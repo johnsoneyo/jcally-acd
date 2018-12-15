@@ -13,6 +13,9 @@ services :
             - mysqlschema=tenant1
             - ariusername=ariuser
             - aripassword=ariuser123
+            - ariwshost=35.231.176.109
+            - appName=hello-world
+            - ariwsport=8088
         ports : 
         - 8020:8080  
 
