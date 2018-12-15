@@ -35,7 +35,7 @@
                     </execution>
                     <execution>
                         <id>npm install</id>
-                        <phase>prepare-package</phase>
+                        <phase>clean</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -71,7 +71,7 @@
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <phase>validate</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>

@@ -65,8 +65,10 @@ RUN sed -i "s/wsport : '8088'/wsport : '${ariwsport}'/g" jcally-ui/src/environme
 RUN sed -i "s/app : 'hello-world'/app : '${appName}'/g" jcally-ui/src/environments/*.ts
 RUN sed -i "s/username : 'asterisk'/ username : '${ariusername}'/g" jcally-ui/src/environments/*.ts
 RUN sed -i "s/password : 'asterisk'/ password : '${aripassword}'/g" jcally-ui/src/environments/*.ts
+RUN sed -i "s/arihost : 'localhost'/arihost : '${ariproxyhost}'/g" jcally-ui/src/environments/*.ts
+RUN sed -i "s/ariport : '8080'/ariport : '${ariproxyport}'/g" jcally-ui/src/environments/*.ts
 
-RUN echo ">>>>>>>>>>>>>PRi>>>>>>>>>>.ting product file >>>>>>>>>>..."
+RUN echo ">>>>>>>>>>>>> Environment Production File >>>>>>>>>>..."
 RUN cat jcally-ui/src/environments/environment.prod.ts
 
 RUN mvn clean package -DskipTests=true
