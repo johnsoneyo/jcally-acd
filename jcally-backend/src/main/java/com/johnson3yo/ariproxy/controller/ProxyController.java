@@ -36,10 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author johnson3yo
  */
-@CrossOrigin(origins = "http://localhost:4200",
-        allowedHeaders = {"Content-Type"},
-        methods = {RequestMethod.POST,
-            RequestMethod.GET, RequestMethod.PUT, RequestMethod.DELETE})
+
 @RestController
 @RequestMapping("ari-proxy")
 public class ProxyController {
