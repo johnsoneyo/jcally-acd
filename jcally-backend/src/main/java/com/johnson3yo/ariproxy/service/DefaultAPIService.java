@@ -53,8 +53,6 @@ public class DefaultAPIService implements ARIService<Channel> {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${ari.host}")
-    private String host;
     @Value("${ari.username}")
     private String username;
     @Value("${ari.password}")
