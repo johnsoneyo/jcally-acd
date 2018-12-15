@@ -60,11 +60,11 @@ RUN cat application.properties
 RUN git clone https://github.com/johnsoneyo/jcally-packaging.git
 
 WORKDIR jcally-packaging
-RUN sed -i "s/wshost: 'localhost'/wshost : '${ariwshost}'/g" jcally-ui/src/environments/*.ts
+RUN sed -i "s/wshost : 'localhost'/wshost : '${ariwshost}'/g" jcally-ui/src/environments/*.ts
 RUN sed -i "s/wsport : '8088'/wsport : '${ariwsport}'/g" jcally-ui/src/environments/*.ts
 RUN sed -i "s/app : 'hello-world'/app : '${appName}'/g" jcally-ui/src/environments/*.ts
-RUN sed -i "s/username : 'asterisk'/ username : '${ariusername}'/g" jcally-ui/src/environments/*.ts
-RUN sed -i "s/password : 'asterisk'/ password : '${aripassword}'/g" jcally-ui/src/environments/*.ts
+RUN sed -i "s/username : 'asterisk'/username : '${ariusername}'/g" jcally-ui/src/environments/*.ts
+RUN sed -i "s/password : 'asterisk'/password : '${aripassword}'/g" jcally-ui/src/environments/*.ts
 RUN sed -i "s/arihost : 'localhost'/arihost : '${ariproxyhost}'/g" jcally-ui/src/environments/*.ts
 RUN sed -i "s/ariport : '8080'/ariport : '${ariproxyport}'/g" jcally-ui/src/environments/*.ts
 
