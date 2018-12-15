@@ -68,7 +68,7 @@ RUN sed -i "s/password : 'asterisk'/password : '${aripassword}'/g" jcally-ui/src
 RUN sed -i "s/arihost : 'localhost'/arihost : '${ariproxyhost}'/g" jcally-ui/src/environments/*.ts
 RUN sed -i "s/ariport : '8080'/ariport : '${ariproxyport}'/g" jcally-ui/src/environments/*.ts
 
-RUN echo ">>>>>>>>>>>>> Environment Production File >>>>>>>>>>..."
+
 RUN cat jcally-ui/src/environments/environment.prod.ts
 
 RUN mvn clean package -DskipTests=true
