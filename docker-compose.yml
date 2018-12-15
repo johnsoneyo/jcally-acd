@@ -8,6 +8,7 @@ services :
             - mysqlhost=10.142.0.2:3306
             - arihost=35.231.176.109:8088
             - ariproxyhost=35.231.176.109
+            - ariproxyport=8082
             - jdbcuser=root
             - jdbcpasswd=freaks03
             - mysqlschema=tenant1
