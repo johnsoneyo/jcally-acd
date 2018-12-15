@@ -31,6 +31,11 @@ export class LoginComponent implements OnInit {
 
 
   login(cred) {
+    
+    setTimeout(()=>{    //<<<---    using ()=> syntax
+      console.log('waiting before attempted login >>>>>>>>');
+ }, 3000);
+  
     this.waiting = true;
     this.auth.login(cred.value).subscribe(user => {
       this.auth.setLoggedIn(true);

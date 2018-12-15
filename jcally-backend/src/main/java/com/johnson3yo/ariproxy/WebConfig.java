@@ -14,8 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  * @author johnson3yo
  */
-@Configuration
-@EnableWebMvc
+//@Configuration
+//@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
  
     @Override
