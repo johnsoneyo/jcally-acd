@@ -13,6 +13,7 @@ export class WsnotifierService {
   public notifyholdingBridgeCreation = new Subject<any>();
   public notifymixingBridgeCreation = new Subject<any>();
   public toastMsg = new Subject<string>();
+  
 
 
   constructor(private service: AriproxyService) { }

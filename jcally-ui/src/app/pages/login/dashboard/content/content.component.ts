@@ -19,9 +19,12 @@ export class ContentComponent implements OnInit {
 
   isAdmin: boolean = false;
   isViewed: boolean = false;
+  waiting : boolean = false;
 
   constructor(public dialog: MatDialog,private notfie : NotifierService, private toast: ToastrService, private ws: WsnotifierService) {
-
+     this.notfie.notifyLogout.subscribe(data =>{
+        this.waiting = true;
+     });
   }
 
   showNavView($event) {

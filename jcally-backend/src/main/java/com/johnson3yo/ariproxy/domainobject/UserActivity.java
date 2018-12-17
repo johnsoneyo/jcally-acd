@@ -50,7 +50,7 @@ public class UserActivity implements Serializable {
     @Enumerated(EnumType.STRING)
     private ActivityType activityType;
     @Column(name = "time_created")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date timeCreated;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
@@ -61,7 +61,7 @@ public class UserActivity implements Serializable {
     }
     
     public enum ActivityType {
-        LOGIN
+        INFO,ERROR,WARNING
     }
 
     public UserActivity(Integer id, String summary, ActivityType activityType, Date timeCreated, User userId) {

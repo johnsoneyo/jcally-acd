@@ -445,4 +445,9 @@ public class DefaultAPIService implements ARIService<Channel> {
         }).get();
     }
 
+    @Override
+    public List<UserActivity> getUserActivities(Integer userId) {
+         return userActivityRepo.findTop6ByUserIdOrderByTimeCreatedDesc(new User(userId));
+    }
+
 }

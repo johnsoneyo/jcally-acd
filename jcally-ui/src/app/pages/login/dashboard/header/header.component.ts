@@ -6,6 +6,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NotifierService } from '../../../../services/notifier.service';
 import { User } from '../../../../datatransferobjects/user';
 import { ThemePalette } from '@angular/material/core';
+import { Subject } from 'rxjs';
+import { AriproxyService } from '../../../../services/ariproxy.service';
+import { UserActivity } from '../../../../datatransferobjects/user.activity';
 
 @Component({
   selector: 'app-header',
@@ -15,24 +18,34 @@ import { ThemePalette } from '@angular/material/core';
 export class HeaderComponent implements OnInit {
 
   public user: User;
-  
-
+  public active : true;
+  public activities : UserActivity[]; 
   constructor(
     private route: ActivatedRoute,
     private ws: WsnotifierService,
+    private notws: NotifierService,
     private w: WebsocketService,
     private auth: AuthService,
-    private router: Router) {
+    private router: Router,
+    private ariService: AriproxyService) {
     this.w.externalCreateObservableSocket();
   }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
+    this.ariService.getUserActivites().subscribe(data => {
+      this.activities = data;
+    });
   }
 
   logout() {
-    this.auth.logout();
-    this.router.navigate(['/']);
+    this.notws.setLogout();
+    setTimeout(() => {
+      this.auth.logout();
+      this.router.navigate(['/']);
+    }, 4000);
+
+
   }
 
 }

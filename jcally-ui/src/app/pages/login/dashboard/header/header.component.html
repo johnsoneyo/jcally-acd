@@ -1,10 +1,38 @@
-<mat-toolbar class="mat-elevation-z5" color="primary">
-  <mat-toolbar-row>
-    <span>J-Cally</span>
-  </mat-toolbar-row>
-  <mat-toolbar-row class="tab-under">
-    <button (click)="logout()" mat-icon-button>
-      <mat-icon>power_settings_new</mat-icon>
+<mat-toolbar class="mat-elevation-z8" color="primary">
+  <span class="logo">JCally</span>
+  <button mat-icon-button >
+      <mat-icon>restore_from_trash</mat-icon>
     </button>
-  </mat-toolbar-row>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>email</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    
+    <mat-nav-list>
+      <mat-list-item>
+        <p matLine>
+          <span>Last activites </span>
+        </p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item *ngFor="let message of activities">
+        <mat-icon matListAvatar>{{message.activityType == 'INFO' ? 'info' : 'danger' }}</mat-icon>
+        <h3 matLine> {{message.activityType}} </h3>
+        <p matLine>
+          <span> {{message.summary}} </span>
+          <span class="demo-2"> -- {{message.timeCreated}} </span>
+        </p>
+       
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <p matLine>
+          <span> See more ... </span>
+        </p>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-menu>
+  <button (click)="logout()" mat-icon-button>
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
 </mat-toolbar>

@@ -5,6 +5,7 @@
  */
 package com.johnson3yo.ariproxy.domainobject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,6 +52,7 @@ public class User implements Serializable {
     @Size(max = 16)
     @Column(name = "phone")
     private String phone;
+    @JsonIgnore
     @OneToMany(mappedBy = "userId")
     private List<UserActivity> userActivityList;
     @Size(max = 64)

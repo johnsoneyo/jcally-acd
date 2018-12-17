@@ -71,4 +71,6 @@ public interface ARIService<T> {
 
     CallLog updateCall(CallLog call);
 
+    List<UserActivity> getUserActivities(Integer userId);
+
 }

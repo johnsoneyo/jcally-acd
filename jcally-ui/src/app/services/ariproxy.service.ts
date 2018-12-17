@@ -13,23 +13,31 @@ import { PlaybackResponse } from '../datatransferobjects/playback.response';
 import { User } from '../datatransferobjects/user';
 import { CallLog } from '../datatransferobjects/call-log';
 import { environment } from '../../environments/environment';
+import { stringify } from 'querystring';
+import { UserActivity } from '../datatransferobjects/user.activity';
 
 @Injectable()
 export class AriproxyService {
 
-  host : string = environment.arihost;
-  port : string = environment.ariport;
+  host: string = environment.arihost;
+  port: string = environment.ariport;
+  user: User;
 
   saveBridge(bridge: BridgeRequest): Observable<any> {
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
+    };
+    preHeader['userId'] = this.user.id.toString();
     let options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+      headers: new HttpHeaders(preHeader)
     };
 
-    return this.http.post('http://'+this.host+':'+this.port+'/ari-proxy/bridges', bridge, options);
+    return this.http.post('http://' + this.host + ':' + this.port + '/ari-proxy/bridges', bridge, options);
   }
   constructor(private http: HttpClient, private notifier: NotifierService) {
+
+    this.user = JSON.parse(localStorage.getItem('user'));
 
     this.getBridges('mixing').subscribe(data => {
       this.notifier.setNotifymixingOnBridgeCreation(data);
@@ -49,27 +57,30 @@ export class AriproxyService {
       }
     };
     return this.http.
-      get<BridgeResponse[]>('http://'+this.host+':'+this.port+'/ari-proxy/bridges', options);
+      get<BridgeResponse[]>('http://' + this.host + ':' + this.port + '/ari-proxy/bridges', options);
   }
 
   getBridge(id: string): Observable<BridgeResponse> {
     return this.http.
-      get<BridgeResponse>('http://'+this.host+':'+this.port+'/ari-proxy/bridges/' + id);
+      get<BridgeResponse>('http://' + this.host + ':' + this.port + '/ari-proxy/bridges/' + id);
   }
 
   addChannelToBridge(channelId: string, bridgeId: string): Observable<any> {
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
+    };
+    preHeader['userId'] = this.user.id.toString();
     let options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+      headers: new HttpHeaders(preHeader)
     };
     return this.http.
-      post('http://'+this.host+':'+this.port+'/ari-proxy/bridges/' + bridgeId + '/' + channelId, options);
+      post('http://' + this.host + ':' + this.port + '/ari-proxy/bridges/' + bridgeId + '/' + channelId, options);
   }
 
   getEndpoints(): Observable<EndpointResponse[]> {
     return this.http.
-      get<EndpointResponse[]>('http://'+this.host+':'+this.port+'/ari-proxy/endpoints').map(res => {
+      get<EndpointResponse[]>('http://' + this.host + ':' + this.port + '/ari-proxy/endpoints').map(res => {
         return res.filter(e => e.resource != 'public');
       })
 
@@ -77,13 +88,16 @@ export class AriproxyService {
 
 
   removeChannelFromBridge(channelId: string, bridgeId: string): Observable<any> {
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
+    };
+    preHeader['userId'] = this.user.id.toString();
     let options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+      headers: new HttpHeaders(preHeader)
     };
     return this.http.
-      post('http://'+this.host+':'+this.port+'/ari-proxy/bridges/' + bridgeId + '/' + channelId, options);
+      post('http://' + this.host + ':' + this.port + '/ari-proxy/bridges/' + bridgeId + '/' + channelId, options);
   }
 
 
@@ -96,80 +110,118 @@ export class AriproxyService {
     p.app = "hello-world";
     p.endpoint = payload.technology + "/" + payload.resource;
 
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
+    };
+    preHeader['userId'] = this.user.id.toString();
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+      headers: new HttpHeaders(preHeader)
     };
 
-    return this.http.post('http://'+this.host+':'+this.port+'/ari-proxy/channels', p, httpOptions);
+    return this.http.post('http://' + this.host + ':' + this.port + '/ari-proxy/channels', p, httpOptions);
   }
 
   getChannels(): Observable<channel[]> {
     return this.http.
-      get<channel[]>('http://'+this.host+':'+this.port+'/ari-proxy/channels')
+      get<channel[]>('http://' + this.host + ':' + this.port + '/ari-proxy/channels')
   }
 
   answerChannel(channelId): Observable<any> {
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
+    };
+    preHeader['userId'] = this.user.id.toString();
+    let httpOptions = {
+      headers: new HttpHeaders(preHeader)
     };
     return this.http.
-      post('http://'+this.host+':'+this.port+'/ari-proxy/channels/' + channelId + '/answer', httpOptions);
+      post('http://' + this.host + ':' + this.port + '/ari-proxy/channels/' + channelId + '/answer', httpOptions);
   }
 
   ringChannel(channelId): Observable<any> {
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
+    };
+    preHeader['userId'] = this.user.id.toString();
+    let httpOptions = {
+      headers: new HttpHeaders(preHeader)
     };
     return this.http.
-      post('http://'+this.host+':'+this.port+'/ari-proxy/channels/' + channelId + '/ring', httpOptions);
+      post('http://' + this.host + ':' + this.port + '/ari-proxy/channels/' + channelId + '/ring', httpOptions);
   }
 
   playmediaInBridge(bridgeId: string): Observable<PlaybackResponse> {
     return this.http.
-      get<PlaybackResponse>('http://'+this.host+':'+this.port+'/ari-proxy/bridges/' + bridgeId + '/playmedia');
+      get<PlaybackResponse>('http://' + this.host + ':' + this.port + '/ari-proxy/bridges/' + bridgeId + '/playmedia');
   }
 
   login(user): Observable<User> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
     };
-    return this.http.post<User>('http://'+this.host+':'+this.port+'/auth', user, httpOptions);
+    preHeader['userId'] = this.user.id.toString();
+    let httpOptions = {
+      headers: new HttpHeaders(preHeader)
+    };
+    return this.http.post<User>('http://' + this.host + ':' + this.port + '/auth', user, httpOptions);
   }
 
   createCallog(log: CallLog): Observable<CallLog> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
     };
-    return this.http.post<CallLog>('http://'+this.host+':'+this.port+'/ari-proxy/calls', log, httpOptions);
+    preHeader['userId'] = this.user.id.toString();
+    let httpOptions = {
+      headers: new HttpHeaders(preHeader)
+    };
+    return this.http.post<CallLog>('http://' + this.host + ':' + this.port + '/ari-proxy/calls', log, httpOptions);
   }
 
   updateCallog(log: CallLog): Observable<CallLog> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
     };
-    return this.http.put<CallLog>('http://'+this.host+':'+this.port+'/ari-proxy/calls', log, httpOptions);
+    preHeader['userId'] = this.user.id.toString();
+    let httpOptions = {
+      headers: new HttpHeaders(preHeader)
+    };
+    return this.http.put<CallLog>('http://' + this.host + ':' + this.port + '/ari-proxy/calls', log, httpOptions);
   }
 
   getCallLogs(pageNo: number): Observable<CallLog[]> {
-    return this.http.get<any>('http://'+this.host+':'+this.port+'/ari-proxy/calls/' + pageNo);
+    return this.http.get<any>('http://' + this.host + ':' + this.port + '/ari-proxy/calls/' + pageNo);
   }
 
   deleteBridge(bridgeId: string): Observable<any> {
-    return this.http.delete('http://'+this.host+':'+this.port+'/ari-proxy/bridges/' + bridgeId);
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
+    };
+    preHeader['userId'] = this.user.id.toString();
+    let httpOptions = {
+      headers: new HttpHeaders(preHeader)
+    };
+    return this.http.delete('http://' + this.host + ':' + this.port + '/ari-proxy/bridges/' + bridgeId, httpOptions);
+  }
+
+  getUserActivites(): Observable<UserActivity[]> {
+    let preHeader = {
+      'userId': '',
+      'Content-Type': 'application/json'
+    };
+    preHeader['userId'] = this.user.id.toString();
+    let httpOptions = {
+      headers: new HttpHeaders(preHeader)
+    };
+    return this.http.get<any>('http://' + this.host + ':' + this.port + '/ari-proxy/useractivities',httpOptions);
   }
 
 }

@@ -1,7 +1,13 @@
- .mat-toolbar-row{
-    
+
+ .mat-toolbar.mat-primary{
+     justify-content: flex-end;
+     align-items: center;
+     height: 50px;
  }
 
+ .logo{
+  margin-right: auto;
+ }
 
  .tab-under{
     display: flex;

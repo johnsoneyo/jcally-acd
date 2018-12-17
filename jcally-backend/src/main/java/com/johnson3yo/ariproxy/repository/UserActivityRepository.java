@@ -5,7 +5,9 @@
  */
 package com.johnson3yo.ariproxy.repository;
 
+import com.johnson3yo.ariproxy.domainobject.User;
 import com.johnson3yo.ariproxy.domainobject.UserActivity;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +15,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author johnson3yo
  */
 public interface UserActivityRepository extends CrudRepository<UserActivity, Integer> {
-    
+
+    List<UserActivity> findTop6ByUserIdOrderByTimeCreatedDesc(User userId);
+
 }

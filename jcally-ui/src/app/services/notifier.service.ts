@@ -22,9 +22,14 @@ export class NotifierService {
   public notifyChannels = new Subject<any>();
   public notifyUser = new Subject<any>();
   public viewBridgeDetail = new Subject<any>();
+  public notifyLogout = new Subject<string>();
   
 
   constructor() { }
+
+  setLogout(){
+    this.notifyLogout.next("true");
+  }
 
   setMessage(message: string) {
     this.subject.next(message);

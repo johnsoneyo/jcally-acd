@@ -8,7 +8,8 @@ package com.johnson3yo.ariproxy.controller;
 import com.johnson3yo.ariproxy.domainobject.User;
 import com.johnson3yo.ariproxy.domainobject.UserActivity;
 import com.johnson3yo.ariproxy.service.ARIService;
-import java.util.Date;
+import com.johnson3yo.ariproxy.service.PublisherService;
+import com.johnson3yo.ariproxy.service.UserEvent;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,13 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author johnson3yo
  */
-
 @RestController
 @RequestMapping("auth")
 public class AuthController {
-    
+
     @Autowired
-    private ARIService service;
+    private ARIService service;    
+    @Autowired private PublisherService publisher;
     
     @PostMapping
     public ResponseEntity login(@Valid @RequestBody User user) {
@@ -36,11 +37,8 @@ public class AuthController {
         if (u == null) {
             return new ResponseEntity<String>("user not found", HttpStatus.NOT_FOUND);
         }
-        UserActivity ua = new UserActivity.UserActivityBuilder().
-                setId(Integer.SIZE).setSummary("logged in").
-                setActivityType(UserActivity.ActivityType.LOGIN).setTimeCreated(new Date()).setUserId(u).build();
-        service.saveActivity(ua);
+       publisher.handleEvent(new UserEvent(this, u, "login in successfull", UserActivity.ActivityType.INFO));
         return new ResponseEntity<User>(u, HttpStatus.OK);
     }
-    
+
 }
