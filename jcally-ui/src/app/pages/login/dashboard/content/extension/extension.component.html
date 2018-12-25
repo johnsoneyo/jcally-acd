@@ -4,6 +4,7 @@
      Endpoints
     </span>
   </mat-toolbar>
+
   <mat-nav-list *ngIf="endpoints else loading">
     <mat-list-item *ngFor="let end of endpoints">
       <a matLine href="...">{{ end.resource }}</a>
@@ -27,5 +28,7 @@
 </div>
 
 <ng-template   #loading>
-    <mat-spinner></mat-spinner>
+  <div class="spinner-container">
+    <mat-spinner [diameter]="50"  ></mat-spinner>
+  </div>
 </ng-template>
