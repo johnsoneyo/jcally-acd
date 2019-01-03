@@ -162,10 +162,8 @@ export class AriproxyService {
 
   login(user): Observable<User> {
     let preHeader = {
-      'userId': '',
       'Content-Type': 'application/json'
     };
-    preHeader['userId'] = this.user.id.toString();
     let httpOptions = {
       headers: new HttpHeaders(preHeader)
     };
