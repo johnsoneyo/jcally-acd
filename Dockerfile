@@ -51,7 +51,8 @@ echo "spring.datasource.hikari.connection-timeout=60000" >> application.properti
 echo "spring.datasource.hikari.maximum-pool-size=5" >> application.properties && \
 echo "media.stream.synthesize=https://texttospeech.googleapis.com/v1beta1/text:synthesize" >> application.properties && \
 echo "media.stream.synthesize.stream=sound:http://localhost:8080/google-tts/stream?text=" >> application.properties && \
-echo "sound.output.dir=/home/johnson3yo/sound" >> application.properties 
+echo "sound.output.dir=/home/johnson3yo/sound" >> application.properties  && \
+echo "wsendpoint=ws://localhost:8088/ari/events?api_key=asterisk:asterisk&app=hello-world" >> application.properties
 
 
 RUN cat application.properties
