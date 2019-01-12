@@ -200,11 +200,15 @@ public class DefaultAPIService implements ARIService<Channel> {
 
     @Override
     public void addChannelToBridge(String bridgeId, String channelId) {
-        HttpEntity entity = new HttpEntity(headers);
-        ResponseEntity<String> exchange = restTemplate.
-                exchange(baseURL.
-                        concat("/bridges/{bridgeId}/addChannel?channel={channelId}"),
-                        HttpMethod.POST, entity, String.class, bridgeId, channelId);
+        try {
+            HttpEntity entity = new HttpEntity(headers);
+            ResponseEntity<String> exchange = restTemplate.
+                    exchange(baseURL.
+                            concat("/bridges/{bridgeId}/addChannel?channel={channelId}"),
+                            HttpMethod.POST, entity, String.class, bridgeId, channelId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -400,9 +404,9 @@ public class DefaultAPIService implements ARIService<Channel> {
     }
 
     private CallLog modifyCallLog(CallLog call) {
-        
+
         CallLog found = callRepo.findByChannelsIgnoreCaseContaining(call.getChannels());
-        
+
         return Optional.of(call).map(c -> {
             c.setId(found.getId());
             return c;
@@ -447,9 +451,7 @@ public class DefaultAPIService implements ARIService<Channel> {
 
     @Override
     public List<UserActivity> getUserActivities(Integer userId) {
-         return userActivityRepo.findTop6ByUserIdOrderByTimeCreatedDesc(new User(userId));
+        return userActivityRepo.findTop6ByUserIdOrderByTimeCreatedDesc(new User(userId));
     }
-
-   
 
 }

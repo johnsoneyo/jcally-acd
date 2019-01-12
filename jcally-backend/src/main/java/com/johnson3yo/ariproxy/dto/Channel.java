@@ -24,6 +24,7 @@ public class Channel {
     public Channel() {
     }
 
+
     public String getId() {
         return id;
     }
@@ -95,17 +96,25 @@ public class Channel {
     public void setLanguage(String language) {
         this.language = language;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Channel{" + "id=" + id + ", name=" + name + ", state=" + state + ", caller=" + caller + ", creationtime=" + creationtime + '}';
+    }
     
     
 
-   private class Caller {
+    public class Caller {
 
-        String name;
-        String number;
+        private String name;
+        private String number;
 
         public Caller() {
+        }
+
+        public Caller(String name, String number) {
+            this.name = name;
+            this.number = number;
         }
 
         public String getName() {
@@ -123,11 +132,17 @@ public class Channel {
         public void setNumber(String number) {
             this.number = number;
         }
+
+        @Override
+        public String toString() {
+            return "Caller{" + "name=" + name + ", number=" + number + '}';
+        }
         
         
+
     }
 
-   private class Connected {
+    private class Connected {
 
         String name;
         String number;
@@ -150,10 +165,10 @@ public class Channel {
         public void setNumber(String number) {
             this.number = number;
         }
-        
+
     }
 
-   private class DialPlan {
+    private class DialPlan {
 
         String context;
         String exten;
@@ -185,7 +200,6 @@ public class Channel {
         public void setPriority(String priority) {
             this.priority = priority;
         }
-        
 
     }
 

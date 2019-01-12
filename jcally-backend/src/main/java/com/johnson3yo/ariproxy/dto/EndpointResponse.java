@@ -59,6 +59,11 @@ public class EndpointResponse {
     public void setCurrentChannel(CurrentChannel currentChannel) {
         this.currentChannel = currentChannel;
     }
+
+    @Override
+    public String toString() {
+        return "EndpointResponse{" + "technology=" + technology + ", resource=" + resource + ", state=" + state + ", channelIds=" + channelIds + '}';
+    }
     
     
 

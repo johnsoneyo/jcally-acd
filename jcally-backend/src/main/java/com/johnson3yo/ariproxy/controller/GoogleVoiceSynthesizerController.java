@@ -53,7 +53,7 @@ public class GoogleVoiceSynthesizerController {
     }
 
     @GetMapping("stream")
-    public void googleTTSStream(@RequestParam("text") String text,HttpServletResponse resp) throws IOException, InterruptedException {
+    public void googleTTSStream(@RequestParam("text") String text, HttpServletResponse resp) throws IOException, InterruptedException {
         Object[] response = service.googleTTS(text);
         InputStreamResource resource = (InputStreamResource) response[0];
         resp.setContentType("audio/mpeg");

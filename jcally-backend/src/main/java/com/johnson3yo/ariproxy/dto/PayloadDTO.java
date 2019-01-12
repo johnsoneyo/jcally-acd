@@ -24,6 +24,17 @@ public class PayloadDTO {
 
     public PayloadDTO() {
     }
+
+    public PayloadDTO(String endpoint, String app, Integer timeout,String appArgs) {
+        this.endpoint = endpoint;
+        this.app = app;
+        this.timeout = timeout;
+        this.appArgs = appArgs;
+    }
+
+    
+    
+    
     
     public String getEndpoint() {
         return endpoint;

@@ -48,8 +48,21 @@ public class CallLog implements Serializable {
     @Transient
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date day;
-   
+    @Column(name = "endpoint")
+    private String endpoint;
+
     public CallLog() {
+    }
+
+    public CallLog(String source, String destination, Date startTime, Date endTime, Integer noOfParticipants, String channels, Date day, String endpoint) {
+        this.source = source;
+        this.destination = destination;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.noOfParticipants = noOfParticipants;
+        this.channels = channels;
+        this.day = day;
+        this.endpoint = endpoint;
     }
 
     public CallLog(Integer id) {
@@ -120,7 +133,14 @@ public class CallLog implements Serializable {
         this.channels = channels;
     }
 
-    
+    public String getEndpoint() {
+        return endpoint;
+    }
+
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -144,6 +164,63 @@ public class CallLog implements Serializable {
     @Override
     public String toString() {
         return "com.johnson3yo.ariproxy.datao.CallLog[ id=" + id + " ]";
+    }
+
+    public static class CallLogBuilder {
+
+        private String source;
+        private String destination;
+        private Date startTime;
+        private Date endTime;
+        private Integer noOfParticipants;
+        private String channels;
+        private Date day;
+        private String endpoint;
+
+        public CallLogBuilder setSource(String source) {
+            this.source = source;
+            return this;
+        }
+
+        public CallLogBuilder setDestination(String destination) {
+            this.destination = destination;
+            return this;
+        }
+
+        public CallLogBuilder setStartTime(Date startTime) {
+            this.startTime = startTime;
+            return this;
+        }
+
+        public CallLogBuilder setEndTime(Date endTime) {
+            this.endTime = endTime;
+            return this;
+        }
+
+        public CallLogBuilder setNoOfParticipants(Integer noOfParticipants) {
+            this.noOfParticipants = noOfParticipants;
+            return this;
+        }
+
+        public CallLogBuilder setChannels(String channels) {
+            this.channels = channels;
+            return this;
+        }
+
+        public CallLogBuilder setDay(Date day) {
+            this.day = day;
+            return this;
+        }
+
+        public CallLogBuilder setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
+            return this;
+        }
+
+        public CallLog build() {
+            return new CallLog(source, destination, startTime, endTime, noOfParticipants, channels, day, endpoint);
+        }
+
     }
 
 }

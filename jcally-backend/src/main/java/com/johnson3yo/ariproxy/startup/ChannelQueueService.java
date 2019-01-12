@@ -5,6 +5,7 @@
  */
 package com.johnson3yo.ariproxy.startup;
 
+import com.johnson3yo.ariproxy.dto.Channel;
 import java.util.LinkedList;
 import java.util.Queue;
 import javax.annotation.PostConstruct;
@@ -20,14 +21,24 @@ import org.springframework.stereotype.Component;
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class ChannelQueueService {
 
-    private Queue<String> queue;
+    private Queue<Channel> queue;
 
     @PostConstruct
     public void initQueue() {
         queue = new LinkedList<>();
     }
 
-    public void addToQueue(String channelId) {
-        queue.add(channelId);
+    public void addToQueue(Channel channel) {
+        queue.add(channel);
     }
+
+    public Queue<Channel> getQueue() {
+        return queue;
+    }
+
+    public void setQueue(Queue<Channel> queue) {
+        this.queue = queue;
+    }
+    
+    
 }
