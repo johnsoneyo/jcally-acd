@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Base64;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +32,7 @@ import org.springframework.web.client.RestTemplate;
 public class GoogleService extends GoogleHttpHeaders {
 
     @Value("${media.stream.synthesize}")
-    private  String synthesize;
+    private String synthesize;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -46,8 +47,14 @@ public class GoogleService extends GoogleHttpHeaders {
 
     public Object[] googleTTS(String text) throws IOException, InterruptedException {
 
-        AudioResponse response = null;
+        String encodedString = Base64.getEncoder().encodeToString(text.getBytes());
+        File soundFile = new File(soundOutputDIR.concat(encodedString.concat(".mp3")));
+        if (soundFile.exists()) {
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(soundFile));
+            return new Object[]{resource, soundFile};
+        }
 
+        AudioResponse response = null;
         GoogleRequest google = new GoogleRequest();
         GoogleRequest.Input input = new GoogleRequest().new Input();
         input.setText(text);
@@ -70,12 +77,13 @@ public class GoogleService extends GoogleHttpHeaders {
         ObjectMapper mapper = new ObjectMapper();
         response = mapper.readValue(exchange.getBody(), AudioResponse.class);
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(soundOutputDIR+"sound.txt"));
+        encodedString = Base64.getEncoder().encodeToString(text.getBytes());
+        BufferedWriter writer = new BufferedWriter(new FileWriter(soundOutputDIR.concat(encodedString).concat(".txt")));
         writer.write(response.getAudioContent());
         writer.close();
-        Process p = Runtime.getRuntime().exec(new String[]{"bash", "-c", "base64 "+soundOutputDIR+"sound.txt --decode > "+soundOutputDIR+"sound.mp3"});
+        Process p = Runtime.getRuntime().exec(new String[]{"bash", "-c", "base64 " + soundOutputDIR.concat(encodedString.concat(".txt")) + " --decode > " + soundOutputDIR.concat(encodedString.concat(".mp3"))});
         p.waitFor();
-        File file = new File(soundOutputDIR+"sound.mp3");
+        File file = new File(soundOutputDIR.concat(encodedString.concat(".mp3")));
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
         return new Object[]{resource, file};
